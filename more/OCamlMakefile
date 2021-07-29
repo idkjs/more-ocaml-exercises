@@ -7,13 +7,13 @@
 #
 ###########################################################################
 
-# Modified by damien for .glade.ml compilation
+# Modified by damien for .glade.re compilation
 
 # Set these variables to the names of the sources to be processed and
 # the result variable. Order matters during linkage!
 
 ifndef SOURCES
-  SOURCES := foo.ml
+  SOURCES := foo.re
 endif
 export SOURCES
 
@@ -30,7 +30,7 @@ export RESULT := $(strip $(RESULT))
 export LIB_PACK_NAME
 
 ifndef DOC_FILES
-  DOC_FILES := $(filter %.mli, $(SOURCES))
+  DOC_FILES := $(filter %.rei, $(SOURCES))
 endif
 export DOC_FILES
 FIRST_DOC_FILE := $(firstword $(DOC_FILES))
@@ -426,36 +426,36 @@ MLDEPDIR := ._d
 BCDIDIR  := ._bcdi
 NCDIDIR  := ._ncdi
 
-FILTER_EXTNS := %.mli %.ml %.mll %.mly %.idl %.oxridl %.c %.m %.$(EXT_CXX) %.rep %.zog %.glade
+FILTER_EXTNS := %.rei %.re %.rel %.rey %.idl %.oxridl %.c %.m %.$(EXT_CXX) %.rep %.zog %.glade
 
 FILTERED     := $(filter $(FILTER_EXTNS), $(SOURCES))
 SOURCE_DIRS  := $(filter-out ./, $(sort $(dir $(FILTERED))))
 
 FILTERED_REP := $(filter %.rep, $(FILTERED))
 DEP_REP      := $(FILTERED_REP:%.rep=$(MLDEPDIR)/%.d)
-AUTO_REP     := $(FILTERED_REP:.rep=.ml)
+AUTO_REP     := $(FILTERED_REP:.rep=.re)
 
 FILTERED_ZOG := $(filter %.zog, $(FILTERED))
 DEP_ZOG      := $(FILTERED_ZOG:%.zog=$(MLDEPDIR)/%.d)
-AUTO_ZOG     := $(FILTERED_ZOG:.zog=.ml)
+AUTO_ZOG     := $(FILTERED_ZOG:.zog=.re)
 
 FILTERED_GLADE := $(filter %.glade, $(FILTERED))
 DEP_GLADE      := $(FILTERED_GLADE:%.glade=$(MLDEPDIR)/%.d)
-AUTO_GLADE     := $(FILTERED_GLADE:.glade=.ml)
+AUTO_GLADE     := $(FILTERED_GLADE:.glade=.re)
 
-FILTERED_ML  := $(filter %.ml, $(FILTERED))
-DEP_ML       := $(FILTERED_ML:%.ml=$(MLDEPDIR)/%.d)
+FILTERED_ML  := $(filter %.re, $(FILTERED))
+DEP_ML       := $(FILTERED_ML:%.re=$(MLDEPDIR)/%.d)
 
-FILTERED_MLI := $(filter %.mli, $(FILTERED))
-DEP_MLI      := $(FILTERED_MLI:.mli=.di)
+FILTERED_MLI := $(filter %.rei, $(FILTERED))
+DEP_MLI      := $(FILTERED_MLI:.rei=.di)
 
-FILTERED_MLL := $(filter %.mll, $(FILTERED))
-DEP_MLL      := $(FILTERED_MLL:%.mll=$(MLDEPDIR)/%.d)
-AUTO_MLL     := $(FILTERED_MLL:.mll=.ml)
+FILTERED_MLL := $(filter %.rel, $(FILTERED))
+DEP_MLL      := $(FILTERED_MLL:%.rel=$(MLDEPDIR)/%.d)
+AUTO_MLL     := $(FILTERED_MLL:.rel=.re)
 
-FILTERED_MLY := $(filter %.mly, $(FILTERED))
-DEP_MLY      := $(FILTERED_MLY:%.mly=$(MLDEPDIR)/%.d) $(FILTERED_MLY:.mly=.di)
-AUTO_MLY     := $(FILTERED_MLY:.mly=.mli) $(FILTERED_MLY:.mly=.ml)
+FILTERED_MLY := $(filter %.rey, $(FILTERED))
+DEP_MLY      := $(FILTERED_MLY:%.rey=$(MLDEPDIR)/%.d) $(FILTERED_MLY:.rey=.di)
+AUTO_MLY     := $(FILTERED_MLY:.rey=.rei) $(FILTERED_MLY:.rey=.re)
 
 FILTERED_IDL := $(filter %.idl, $(FILTERED))
 DEP_IDL      := $(FILTERED_IDL:%.idl=$(MLDEPDIR)/%.d) $(FILTERED_IDL:.idl=.di)
@@ -464,11 +464,11 @@ ifndef NOIDLHEADER
  C_IDL += $(FILTERED_IDL:.idl=.h)
 endif
 OBJ_C_IDL    := $(FILTERED_IDL:%.idl=%_stubs.$(EXT_OBJ))
-AUTO_IDL     := $(FILTERED_IDL:.idl=.mli) $(FILTERED_IDL:.idl=.ml) $(C_IDL)
+AUTO_IDL     := $(FILTERED_IDL:.idl=.rei) $(FILTERED_IDL:.idl=.re) $(C_IDL)
 
 FILTERED_OXRIDL := $(filter %.oxridl, $(FILTERED))
 DEP_OXRIDL      := $(FILTERED_OXRIDL:%.oxridl=$(MLDEPDIR)/%.d) $(FILTERED_OXRIDL:.oxridl=.di)
-AUTO_OXRIDL     := $(FILTERED_OXRIDL:.oxridl=.mli) $(FILTERED_OXRIDL:.oxridl=.ml) $(C_OXRIDL)
+AUTO_OXRIDL     := $(FILTERED_OXRIDL:.oxridl=.rei) $(FILTERED_OXRIDL:.oxridl=.re) $(C_OXRIDL)
 
 FILTERED_C_CXX := $(filter %.c %.m %.$(EXT_CXX), $(FILTERED))
 OBJ_C_CXX      := $(FILTERED_C_CXX:.c=.$(EXT_OBJ))
@@ -484,13 +484,13 @@ MLIDEPS      := $(filter %.di, $(ALL_DEPS))
 BCDEPIS      := $(MLIDEPS:%.di=$(BCDIDIR)/%.di)
 NCDEPIS      := $(MLIDEPS:%.di=$(NCDIDIR)/%.di)
 
-ALLML        := $(filter %.mli %.ml %.mll %.mly %.idl %.oxridl %.rep %.zog %.glade, $(FILTERED))
+ALLML        := $(filter %.rei %.re %.rel %.rey %.idl %.oxridl %.rep %.zog %.glade, $(FILTERED))
 
-IMPLO_INTF   := $(ALLML:%.mli=%.mli.__)
+IMPLO_INTF   := $(ALLML:%.rei=%.rei.__)
 IMPLO_INTF   := $(foreach file, $(IMPLO_INTF), \
                   $(basename $(file)).cmi $(basename $(file)).cmo)
-IMPLO_INTF   := $(filter-out %.mli.cmo, $(IMPLO_INTF))
-IMPLO_INTF   := $(IMPLO_INTF:%.mli.cmi=%.cmi)
+IMPLO_INTF   := $(filter-out %.rei.cmo, $(IMPLO_INTF))
+IMPLO_INTF   := $(IMPLO_INTF:%.rei.cmi=%.cmi)
 
 IMPLX_INTF   := $(IMPLO_INTF:.cmo=.cmx)
 
@@ -533,7 +533,7 @@ ifndef STATIC
 endif
 
 ifndef LIBINSTALL_FILES
-  LIBINSTALL_FILES := $(RESULT).mli $(RESULT).cmi $(RESULT).cma \
+  LIBINSTALL_FILES := $(RESULT).rei $(RESULT).cmi $(RESULT).cma \
 		      $(RESULT).cmxa $(RESULT).$(EXT_LIB) $(RES_CLIB)
   ifndef STATIC
     ifneq ($(strip $(OBJ_LINK)),)
@@ -968,8 +968,8 @@ endif
 				$(OBJS_LIBS) $(ALL_LDFLAGS) -o $@$(EXE) \
 				$(REAL_IMPL)
 
-.SUFFIXES:		.mli .ml .cmi .cmo .cmx .cma .cmxa .$(EXT_OBJ) \
-                        .mly .di .d .$(EXT_LIB) .idl %.oxridl .c .m .$(EXT_CXX) .h .so \
+.SUFFIXES:		.rei .re .cmi .cmo .cmx .cma .cmxa .$(EXT_OBJ) \
+                        .rey .di .d .$(EXT_LIB) .idl %.oxridl .c .m .$(EXT_CXX) .h .so \
                         .rep .zog .glade
 
 ifndef STATIC
@@ -1016,11 +1016,11 @@ $(RESULT).cmxa $(RESULT).$(EXT_LIB):	$(REAL_IMPL_INTF) $(EXTRADEPS) $(RESULTDEPS
 			$(REAL_OCAMLFIND) $(OCAMLOPT) -a $(OBJS_LIBS) $(ALL_LDFLAGS) -o $@ $(REAL_IMPL)
 else
 # Packing a bytecode library
-LIB_PACK_NAME_MLI = $(wildcard $(LIB_PACK_NAME).mli)
+LIB_PACK_NAME_MLI = $(wildcard $(LIB_PACK_NAME).rei)
 ifeq ($(LIB_PACK_NAME_MLI),)
 LIB_PACK_NAME_CMI = $(LIB_PACK_NAME).cmi
 else
-# $(LIB_PACK_NAME).mli exists, it likely depends on other compiled interfaces
+# $(LIB_PACK_NAME).rei exists, it likely depends on other compiled interfaces
 LIB_PACK_NAME_CMI =
 $(LIB_PACK_NAME).cmi: $(REAL_IMPL_INTF)
 endif
@@ -1028,7 +1028,7 @@ ifdef BYTE_OCAML
 $(LIB_PACK_NAME_CMI) $(LIB_PACK_NAME).cmo: $(REAL_IMPL_INTF)
 			$(REAL_OCAMLFIND) $(REAL_OCAMLC) -pack -o $(LIB_PACK_NAME).cmo $(OCAMLLDFLAGS) $(REAL_IMPL)
 # Packing into a unit which can be transformed into a library
-# Remember the .ml's must have been compiled with -for-pack $(LIB_PACK_NAME)
+# Remember the .re's must have been compiled with -for-pack $(LIB_PACK_NAME)
 else
 $(LIB_PACK_NAME_CMI) $(LIB_PACK_NAME).cmx: $(REAL_IMPL_INTF)
 			$(REAL_OCAMLFIND) $(OCAMLOPT) -pack -o $(LIB_PACK_NAME).cmx  $(OCAMLLDFLAGS) $(REAL_IMPL)
@@ -1052,7 +1052,7 @@ else
   endif
 endif
 
-%.cmi:	%.mli $(EXTRADEPS)
+%.cmi:	%.rei $(EXTRADEPS)
 			$(QUIET)pp=`sed -n -e '/^#/d' -e 's/(\*pp \([^*]*\) \*)/\1/p;q' $<`; \
 			if [ -z "$$pp" ]; then \
 			  $(ECHO) $(REAL_OCAMLFIND) $(INTF_OCAMLC) $(OCAML_FIND_PACKAGES) \
@@ -1072,7 +1072,7 @@ endif
 
 %.cmi: %$(IMPL_SUF);
 
-%$(IMPL_SUF) %.$(EXT_OBJ):	%.ml $(EXTRADEPS)
+%$(IMPL_SUF) %.$(EXT_OBJ):	%.re $(EXTRADEPS)
 			$(QUIET)pp=`sed -n -e '/^#/d' -e 's/(\*pp \([^*]*\) \*)/\1/p;q' $<`; \
 			if [ -z "$$pp" ]; then \
 			  $(ECHO) $(REAL_OCAMLFIND) $(REAL_OCAMLC) $(OCAML_FIND_PACKAGES) \
@@ -1086,44 +1086,44 @@ endif
 				-c -pp "$$pp $(PPFLAGS)" $(ALL_OCAMLCFLAGS) $<; \
 			fi
 
-.PRECIOUS:		%.ml
-%.ml:			%.mll
+.PRECIOUS:		%.re
+%.re:			%.rel
 			$(OCAMLLEX) $(LFLAGS) $<
 
-.PRECIOUS:              %.ml %.mli
-%.ml %.mli:             %.mly
+.PRECIOUS:              %.re %.rei
+%.re %.rei:             %.rey
 			$(OCAMLYACC) $(YFLAGS) $<
 			$(QUIET)pp=`sed -n -e 's/.*(\*pp \([^*]*\) \*).*/\1/p;q' $<`; \
 			if [ ! -z "$$pp" ]; then \
-			  mv $*.ml $*.ml.temporary; \
-			  echo "(*pp $$pp $(PPFLAGS)*)" > $*.ml; \
-			  cat $*.ml.temporary >> $*.ml; \
-			  rm $*.ml.temporary; \
-			  mv $*.mli $*.mli.temporary; \
-			  echo "(*pp $$pp $(PPFLAGS)*)" > $*.mli; \
-			  cat $*.mli.temporary >> $*.mli; \
-			  rm $*.mli.temporary; \
+			  mv $*.re $*.re.temporary; \
+			  echo "(*pp $$pp $(PPFLAGS)*)" > $*.re; \
+			  cat $*.re.temporary >> $*.re; \
+			  rm $*.re.temporary; \
+			  mv $*.rei $*.rei.temporary; \
+			  echo "(*pp $$pp $(PPFLAGS)*)" > $*.rei; \
+			  cat $*.rei.temporary >> $*.rei; \
+			  rm $*.rei.temporary; \
 			fi
 
 
-.PRECIOUS:		%.ml
-%.ml:			%.rep
+.PRECIOUS:		%.re
+%.re:			%.rep
 			$(CAMELEON_REPORT) $(CAMELEON_REPORT_FLAGS) -gen $<
 
-.PRECIOUS:		%.ml
-%.ml:			%.zog
+.PRECIOUS:		%.re
+%.re:			%.zog
 			$(CAMELEON_ZOGGY)  $(CAMELEON_ZOGGY_FLAGS) -impl $< > $@
 
-.PRECIOUS:		%.ml
-%.ml:			%.glade
+.PRECIOUS:		%.re
+%.re:			%.glade
 			$(OCAML_GLADECC)  $(OCAML_GLADECC_FLAGS) $< > $@
 
-.PRECIOUS:		%.ml %.mli
-%.ml %.mli:		%.oxridl
+.PRECIOUS:		%.re %.rei
+%.re %.rei:		%.oxridl
 			$(OXRIDL) $<
 
-.PRECIOUS:		%.ml %.mli %_stubs.c %.h
-%.ml %.mli %_stubs.c %.h:		%.idl
+.PRECIOUS:		%.re %.rei %_stubs.c %.h
+%.re %.rei %_stubs.c %.h:		%.idl
 			$(CAMLIDL) $(MAYBE_IDL_HEADER) $(IDLFLAGS) \
 				$(CAMLIDLFLAGS) $<
 			$(QUIET)if [ $(NOIDLHEADER) ]; then touch $*.h; fi
@@ -1143,7 +1143,7 @@ endif
 				-I'$(OCAMLLIBPATH)' \
 				$< $(CFLAG_O)$@
 
-$(MLDEPDIR)/%.d:	%.ml
+$(MLDEPDIR)/%.d:	%.re
 			$(QUIET)if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
 			$(QUIET)pp=`sed -n -e '/^#/d' -e 's/(\*pp \([^*]*\) \*)/\1/p;q' $<`; \
 			if [ -z "$$pp" ]; then \
@@ -1158,7 +1158,7 @@ $(MLDEPDIR)/%.d:	%.ml
 				-pp "$$pp $(PPFLAGS)" $(INCFLAGS) $< > $@; \
 			fi
 
-$(BCDIDIR)/%.di $(NCDIDIR)/%.di:	%.mli
+$(BCDIDIR)/%.di $(NCDIDIR)/%.di:	%.rei
 			$(QUIET)if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
 			$(QUIET)pp=`sed -n -e '/^#/d' -e 's/(\*pp \([^*]*\) \*)/\1/p;q' $<`; \
 			if [ -z "$$pp" ]; then \

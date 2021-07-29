@@ -1,6 +1,6 @@
 PDFMODS = pdf pdfwrite pdfpage pdfhello
 
-SOURCES = $(foreach x,$(PDFMODS),$(x).ml $(x).mli) pdfmain.ml
+SOURCES = $(foreach x,$(PDFMODS),$(x).re $(x).rei) pdfmain.re
 
 MODS = more
 

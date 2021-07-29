@@ -1,4 +1,4 @@
-SOURCES = examples.ml
+SOURCES = examples.re
 
 RESULT = examples
 

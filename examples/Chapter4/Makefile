@@ -1,10 +1,10 @@
-SOURCES = input.ml
+SOURCES = input.re
 
 RESULT = input
 
 INCDIRS = ../../more/
 
-LIBS = more 
+LIBS = more
 
 OCAMLNCFLAGS = -g
 OCAMLBCFLAGS = -g

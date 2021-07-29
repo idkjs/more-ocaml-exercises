@@ -1,10 +1,10 @@
-SOURCES = exercises.ml
+SOURCES = exercises.re
 
 RESULT = exercises
 
 INCDIRS = ../../more/
 
-LIBS = more 
+LIBS = more
 
 OCAMLNCFLAGS = -g
 OCAMLBCFLAGS = -g

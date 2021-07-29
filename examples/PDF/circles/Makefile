@@ -1,10 +1,10 @@
-SOURCES = circles.ml
+SOURCES = circles.re
 
 RESULT = circles
 
 INCDIRS = ../../../more/ ../
 
-LIBS = pdfmain 
+LIBS = pdfmain
 
 OCAMLNCFLAGS = -g
 OCAMLBCFLAGS = -g

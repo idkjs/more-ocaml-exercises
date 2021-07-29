@@ -1,4 +1,4 @@
-SOURCES = more.mli more.ml
+SOURCES = more.rei more.re
 
 RESULT = more
 

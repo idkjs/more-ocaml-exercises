@@ -1,10 +1,10 @@
-SOURCES = compressed.ml
+SOURCES = compressed.re
 
 RESULT = compressed
 
 INCDIRS = ../../../more/ ../../../examples/Chapter4/ ../../../examples/Chapter5/ ../../../examples/PDF/ ../../../examples
 
-LIBS = input bits pdfmain 
+LIBS = input bits pdfmain
 
 OCAMLNCFLAGS = -g
 OCAMLBCFLAGS = -g

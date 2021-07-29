@@ -1,10 +1,10 @@
-SOURCES = examples.ml
+SOURCES = examples.re
 
 RESULT = examples
 
 INCDIRS = ../../more/
 
-LIBS = unix more 
+LIBS = unix more
 
 OCAMLNCFLAGS = -g
 OCAMLBCFLAGS = -g

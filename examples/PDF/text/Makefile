@@ -1,10 +1,10 @@
-SOURCES = text.ml
+SOURCES = text.re
 
 RESULT = text
 
 INCDIRS = ../../../more/ ../ ../../Chapter4/
 
-LIBS = input pdfmain 
+LIBS = input pdfmain
 
 OCAMLNCFLAGS = -g
 OCAMLBCFLAGS = -g

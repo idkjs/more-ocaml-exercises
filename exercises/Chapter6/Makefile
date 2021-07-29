@@ -1,10 +1,10 @@
-SOURCES = exercises.ml
+SOURCES = exercises.re
 
 RESULT = exercises
 
 INCDIRS = ../../more/ ../../examples/Chapter4/ ../../examples/Chapter5/
 
-LIBS = unix more input bits 
+LIBS = unix more input bits
 
 OCAMLNCFLAGS = -g
 OCAMLBCFLAGS = -g

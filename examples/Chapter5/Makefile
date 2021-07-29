@@ -1,4 +1,4 @@
-SOURCES = bits.ml
+SOURCES = bits.re
 
 RESULT = bits
 

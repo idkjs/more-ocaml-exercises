@@ -15,7 +15,7 @@ Question 2 in Chapter 14
 
 The directory "text" contains the example from Chapter 16.
 
-See the text of pdfhello.ml and the other modules for code or the answers to
+See the text of pdfhello.re and the other modules for code or the answers to
 other questions with the exception of:
 
 a) Chapter 16 q1-q4, which are in exercises/PDF in this download
@@ -24,5 +24,5 @@ b) Chapter 14 q3, which is in exercises/PDF in this download
 
 This slightly unorthodox layout is required by the dependencies of the various
 modules in use here, and the specific questions and answers. You are advised to
-read all the code in each pdf*.ml and pdf*.mli file.
+read all the code in each pdf*.re and pdf*.rei file.
 
