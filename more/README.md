@@ -3,9 +3,9 @@ The 'more' package
 
 This is a local copy of the 'More' module described in the chapter "Our Working
 Environment" in the book. It is used by most of the other examples and
-exercises. 
+exercises.
 
-For your own use, you should consider the OPAM package more-ocaml, which
+For your own use, you should consider the OPAM package more-reason, which
 installs this. For manual installation, using ocamlfind, on platforms not
 supported by OPAM, you may type...
 
